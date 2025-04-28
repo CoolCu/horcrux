@@ -81,7 +81,7 @@ func WaitAndTerminate(logger cometlog.Logger, services []cometservice.Service, p
 	if err != nil {
 		panic(fmt.Errorf("error opening PID file: %s. %w", pidFilePath, err))
 	}
-	_, err = pidFile.Write([]byte(fmt.Sprintf("%d\n", os.Getpid())))
+	_, err = pidFile.Write(fmt.Appendf(nil, "%d\n", os.Getpid()))
 	pidFile.Close()
 	if err != nil {
 		panic(fmt.Errorf("error writing to lock file: %s. %w", pidFilePath, err))

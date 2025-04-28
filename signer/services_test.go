@@ -28,7 +28,7 @@ func init() {
 func mockHorcruxChildProcess(pidFilePath string) {
 	_ = os.WriteFile(
 		pidFilePath,
-		[]byte(fmt.Sprintf("%d\n", os.Getpid())),
+		fmt.Appendf(nil, "%d\n", os.Getpid()),
 		0600,
 	)
 }
@@ -124,7 +124,7 @@ func TestIsRunningNonExistentPid(t *testing.T) {
 
 	err = os.WriteFile(
 		pidFilePath,
-		[]byte(fmt.Sprintf("%d\n", pid)),
+		fmt.Appendf(nil, "%d\n", pid),
 		0600,
 	)
 	require.NoError(t, err, "error writing pid file")
